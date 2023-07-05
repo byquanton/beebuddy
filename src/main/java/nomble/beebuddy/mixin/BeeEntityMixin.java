@@ -3,13 +3,16 @@ package nomble.beebuddy.mixin;
 import java.nio.charset.CoderMalfunctionError;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.function.Predicate;
 
 import net.minecraft.advancement.criterion.Criteria;
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ai.goal.AnimalMateGoal;
 import net.minecraft.entity.ai.goal.FollowParentGoal;
 import net.minecraft.entity.ai.goal.LookAtEntityGoal;
 import net.minecraft.entity.ai.goal.PrioritizedGoal;
+import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.ai.goal.RevengeGoal;
 import net.minecraft.entity.ai.goal.SwimGoal;
 import net.minecraft.entity.attribute.EntityAttributes;
@@ -29,6 +32,7 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraft.server.world.ServerWorld;
 
@@ -60,8 +64,6 @@ public abstract class BeeEntityMixin extends AnimalEntityMixin
     public BeeEntityMixin(EntityType<? extends PassiveEntity> t, World w){
         super(t, w);
     }
-
-
 
     @Unique
     private static final TrackedData<Byte> beebuddy$TAMEFLAGS
